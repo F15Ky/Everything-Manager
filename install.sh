@@ -24,6 +24,7 @@ install_nix () {
                 name = \"all\";
                 paths = [
                   haskell.compiler.ghc8104
+                  haskellPackages.cabal-install
                   unstable.lorri
                   unstable.direnv
                 ];
@@ -72,7 +73,10 @@ then
     done
 fi
 
-nix-env -iA cachix -f https://cachix.org/api/v1/install
+if ! command -v cachix &> /dev/null
+then
+    nix-env -iA cachix -f https://cachix.org/api/v1/install
+fi
 cachix use everythingmanager
 nix-shell
 cabal update
