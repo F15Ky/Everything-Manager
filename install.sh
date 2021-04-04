@@ -20,9 +20,6 @@ install_nix () {
             unstable = import <nixpkgs> { inherit config; };
         in
           {
-            allowUnfree = true;
-            allowBroken = true;
-
             packageOverrides = pkgs: rec {
               all = pkgs.buildEnv {
                 name = \"all\";
